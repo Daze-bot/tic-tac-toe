@@ -1,5 +1,11 @@
+:root {
+  --primary-background-color: #252525;
+  --secondary-background-color: #e9e9e9;
+  --blue-color: #1e8cbe;
+}
+
 @font-face {
-  font-family: 'Marker';
+  font-family: 'marker';
   src: url(./fonts/PermanentMarker-Regular.ttf);
 }
 
@@ -13,9 +19,52 @@
   list-style: none;
 }
 
-.footer {
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  background-color: var(--primary-background-color);
+}
+
+h1 {
+  font-family: 'marker';
+  font-size: 4rem;
+  color: var(--blue-color);
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameContainer {
+  background-color: var(--blue-color);
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 10px;
+  width: 500px;
+  height: 500px;
+  border: 10px solid var(--blue-color);
+  border-radius: 8px;
+}
+
+.gameSquare {
   background-color: var(--secondary-background-color);
-  color: var(--primary-text-color);
+  font-family: 'marker';
+  font-size: 5rem;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  background-color: var(--primary-background-color);
+  color: var(--blue-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +75,7 @@
 .footer a:active {
   padding: 2px;
   text-decoration: none;
-  color: var(--primary-text-color);
+  color: var(--blue-color);
 }
 
 .footer a:hover {
