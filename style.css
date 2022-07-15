@@ -24,21 +24,26 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  align-items: center;
   background-color: var(--primary-background-color);
+}
+
+header {
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
   font-family: 'marker';
   font-size: 4rem;
   color: var(--blue-color);
+  margin-top: 20px;
 }
 
 main {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .gameContainer {
@@ -60,6 +65,10 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.gameSquare:hover {
+  filter: brightness(90%);
 }
 
 .footer {
