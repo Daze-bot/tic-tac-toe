@@ -54,7 +54,7 @@ main {
   width: 500px;
   height: 500px;
   border: 10px solid var(--blue-color);
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .gameSquare {
