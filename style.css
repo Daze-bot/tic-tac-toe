@@ -68,7 +68,9 @@ main {
 }
 
 .gameSquare:hover {
-  filter: brightness(90%);
+  border: 1px solid var(--primary-background-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  filter: brightness(105%);
 }
 
 .footer {
