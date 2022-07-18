@@ -32,7 +32,11 @@ const gameBoard = (() => {
     } else if (array[2] == array[4] && array[2] == array[6] && array[2] !== "") {
       return array[2];
     } else {
-      return "";
+      if (array.includes("")) {
+        return "";
+      } else {
+        return "draw";
+      }
     }
   }
 
@@ -59,15 +63,20 @@ const gameFlow = (() => {
       player2.turn = false;
     }
     gameBoard.displayMarks(gameBoard.gameArray);
-    let winner = gameBoard.checkWinner(gameBoard.gameArray);
-    if (winner === "") {
+    displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
+  }
+
+  function displayWinner(result) {
+    if (result === "") {
       return
-    } else if (winner === player1.getMarker()) {
+    } else if (result === player1.getMarker()) {
       console.log("The winner is: " + player1.getName());
       gameSquares.forEach(square => square.removeEventListener('click', addMark));
-    } else if (winner === player2.getMarker()) {
+    } else if (result === player2.getMarker()) {
       console.log("The winner is: " + player2.getName());
       gameSquares.forEach(square => square.removeEventListener('click', addMark)); 
+    } else if (result === "draw") {
+      console.log("The game is a draw");
     }
   }
 })();
