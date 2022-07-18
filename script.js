@@ -4,6 +4,16 @@ const createPlayer = (name, marker, turn) => {
   return {getName, getMarker, turn};
 };
 
+const newGame = (() => {
+
+
+
+
+
+
+  
+})();
+
 const gameBoard = (() => {
   let gameArray = ["", "", "", "", "", "", "", "", ""];
 

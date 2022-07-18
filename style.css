@@ -43,6 +43,7 @@ main {
   display: flex;
   align-items: stretch;
   justify-content: center;
+  position: relative;
 }
 
 .gameSpace {
@@ -66,13 +67,15 @@ main {
   color: var(--blue-color);
 }
 
-.gameButtons button:hover {
+.gameButtons button:hover,
+.newGameOptions button:hover {
   background-color: var(--blue-color);
   color: var(--secondary-background-color);
 }
 
-.gameButtons button:active {
-  transform: translateY(2px);
+.gameButtons button:active,
+.newGameOptions button:active {
+  transform: translateY(1px);
 }
 
 .gameContainer {
@@ -103,6 +106,29 @@ main {
   filter: brightness(105%);
 }
 
+.newGameOptions {
+  background-color: var(--primary-background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10vw;
+  position: relative;
+  min-height: 200px;
+  min-width: 400px;
+  margin-bottom: 50px;
+}
+
+.newGameOptions button {
+  border: 2px solid var(--blue-color);
+  width: 35vw;
+  height: 50%;
+  border-radius: 10px;
+  font-size: 2.5rem;
+  cursor: pointer;
+  background-color: var(--primary-background-color);
+  color: var(--blue-color);
+}
+
 .footer {
   background-color: var(--primary-background-color);
   color: var(--blue-color);
@@ -131,4 +157,8 @@ main {
   border: none;
   box-shadow: none;
   filter: none;
+}
+
+.hidden {
+  display: none;
 }
