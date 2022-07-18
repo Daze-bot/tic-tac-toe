@@ -73,18 +73,14 @@ const gameFlow = (() => {
       return
     } else if (result === player1.getMarker()) {
       console.log("The winner is: " + player1.getName());
-      gameSquares.forEach(square => {
-        square.removeEventListener('click', addMark);
-        square.classList.add('taken');
-      });
     } else if (result === player2.getMarker()) {
       console.log("The winner is: " + player2.getName());
-      gameSquares.forEach(square => {
-        square.removeEventListener('click', addMark);
-        square.classList.add('taken');
-      });
     } else if (result === "draw") {
       console.log("The game is a draw");
     }
+    gameSquares.forEach(square => {
+      square.removeEventListener('click', addMark);
+      square.classList.add('taken');
+    });
   }
 })();
