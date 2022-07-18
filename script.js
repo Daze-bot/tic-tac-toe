@@ -26,7 +26,7 @@ const gameBoard = (() => {
     } else if (array[1] == array[4] && array[1] == array[7]) {
       return array[1];
     } else if (array[2] == array[5] && array[2] == array[8]) {
-      return winner = array[2];
+      return array[2];
     } else if (array[0] == array[4] && array[0] == array[8]) {
       return array[0];
     } else if (array[2] == array[4] && array[2] == array[6]) {
