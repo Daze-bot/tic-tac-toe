@@ -15,12 +15,24 @@ const gameBoard = (() => {
   }
 
   function checkWinner(array) {
-    if (array[0] === array[1] && array[0] === array[2]) {
-      if (gameFlow.player1.getMarker() === array[0]) {
-        console.log("The Winner is: " + gameFlow.player1.getName());
-      } else {
-        console.log("The Winner is: " + gameFlow.player2.getName());
-      }
+    if (array[0] == array[1] && array[0] == array[2]) {
+      return array[0];
+    } else if (array[3] == array[4] && array[3] == array[5]) {
+      return array[3];
+    } else if (array[6] == array[7] && array[6] == array[8]) {
+      return array[6];
+    } else if (array[0] == array[3] && array[0] == array[6]) {
+      return array[0];
+    } else if (array[1] == array[4] && array[1] == array[7]) {
+      return array[1];
+    } else if (array[2] == array[5] && array[2] == array[8]) {
+      return winner = array[2];
+    } else if (array[0] == array[4] && array[0] == array[8]) {
+      return array[0];
+    } else if (array[2] == array[4] && array[2] == array[6]) {
+      return array[2];
+    } else {
+    return "";
     }
   }
 
@@ -47,8 +59,15 @@ const gameFlow = (() => {
       player2.turn = false;
     }
     gameBoard.displayMarks(gameBoard.gameArray);
-    gameBoard.checkWinner(gameBoard.gameArray);
+    let winner = gameBoard.checkWinner(gameBoard.gameArray);
+    if (winner === "") {
+      return
+    } else if (winner === player1.getMarker()) {
+      console.log("The winner is: " + player1.getName());
+      gameSquares.forEach(square => square.removeEventListener('click', addMark));
+    } else if (winner === player2.getMarker()) {
+      console.log("The winner is: " + player2.getName());
+      gameSquares.forEach(square => square.removeEventListener('click', addMark)); 
+    }
   }
-
-  return {player1, player2};
 })();
