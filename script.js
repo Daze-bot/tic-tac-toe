@@ -32,7 +32,7 @@ const gameBoard = (() => {
     } else if (array[2] == array[4] && array[2] == array[6]) {
       return array[2];
     } else {
-    return "";
+      return "";
     }
   }
 
