@@ -50,6 +50,9 @@ const gameFlow = (() => {
   let gameSquares = document.querySelectorAll('.gameSquare');
   gameSquares.forEach(square => square.addEventListener('click', addMark));
 
+  let resetBtn = document.querySelector('.restartGame');
+  resetBtn.addEventListener('click', resetGame);
+
   function addMark() {
     if (this.textContent !== "") {
       return
@@ -82,5 +85,16 @@ const gameFlow = (() => {
       square.removeEventListener('click', addMark);
       square.classList.add('taken');
     });
+  }
+
+  function resetGame() {
+    gameBoard.gameArray = ["", "", "", "", "", "", "", "", ""];
+    gameBoard.displayMarks(gameBoard.gameArray);
+    gameSquares.forEach(square => {
+      square.addEventListener('click', addMark);
+      square.classList.remove('taken');
+    });
+    player1.turn = true;
+    player2.turn = false;
   }
 })();
