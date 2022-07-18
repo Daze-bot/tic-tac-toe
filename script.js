@@ -5,13 +5,17 @@ const createPlayer = (name, marker, turn) => {
 };
 
 const newGame = (() => {
+  let playerGame = document.querySelector('.vsPlayer');
+  playerGame.addEventListener('click', choosePlayers);
+
+  function choosePlayers() {
+    let newGameDiv = document.querySelector('.newGameOptions');
+    newGameDiv.classList.add('hidden');
+    let vsPlayerDiv = document.querySelector('.vsPlayerOptions');
+    vsPlayerDiv.classList.remove('hidden');
+  }
 
 
-
-
-
-
-  
 })();
 
 const gameBoard = (() => {
@@ -63,6 +67,9 @@ const gameFlow = (() => {
   let resetBtn = document.querySelector('.restartGame');
   resetBtn.addEventListener('click', resetGame);
 
+  let newGameBtn = document.querySelector('.newGame');
+  newGameBtn.addEventListener('click', startNewGame);
+
   function addMark() {
     if (this.textContent !== "") {
       return
@@ -106,5 +113,13 @@ const gameFlow = (() => {
     });
     player1.turn = true;
     player2.turn = false;
+  }
+
+  function startNewGame() {
+    resetGame();
+    let gameSpace = document.querySelector('.gameSpace');
+    gameSpace.classList.add('hidden');
+    let newGameDiv = document.querySelector('.newGameOptions');
+    newGameDiv.classList.remove('hidden');
   }
 })();
