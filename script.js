@@ -55,10 +55,12 @@ const gameFlow = (() => {
       return
     } else if (player1.turn) {
       gameBoard.gameArray.splice(this.id, 1, player1.getMarker());
+      this.classList.add('taken');
       player1.turn = false;
       player2.turn = true;
     } else if (player2.turn) {
       gameBoard.gameArray.splice(this.id, 1, player2.getMarker());
+      this.classList.add('taken');
       player1.turn = true;
       player2.turn = false;
     }
@@ -71,10 +73,16 @@ const gameFlow = (() => {
       return
     } else if (result === player1.getMarker()) {
       console.log("The winner is: " + player1.getName());
-      gameSquares.forEach(square => square.removeEventListener('click', addMark));
+      gameSquares.forEach(square => {
+        square.removeEventListener('click', addMark);
+        square.classList.add('taken');
+      });
     } else if (result === player2.getMarker()) {
       console.log("The winner is: " + player2.getName());
-      gameSquares.forEach(square => square.removeEventListener('click', addMark)); 
+      gameSquares.forEach(square => {
+        square.removeEventListener('click', addMark);
+        square.classList.add('taken');
+      });
     } else if (result === "draw") {
       console.log("The game is a draw");
     }

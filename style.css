@@ -36,14 +36,25 @@ h1 {
   font-family: 'marker';
   font-size: 4rem;
   color: var(--blue-color);
-  margin-top: 20px;
 }
 
 main {
   flex-grow: 1;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
+}
+
+.gameSpace {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.gameButtons {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
 }
 
 .gameContainer {
@@ -65,6 +76,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .gameSquare:hover {
@@ -91,4 +103,14 @@ main {
 
 .footer a:hover {
   font-weight: 700;
+}
+
+.taken {
+  cursor: default;
+}
+
+.taken:hover {
+  border: none;
+  box-shadow: none;
+  filter: none;
 }
