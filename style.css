@@ -50,6 +50,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  position: relative;
 }
 
 .gameButtons {
@@ -73,6 +74,18 @@ main {
 .returnButton:hover {
   background-color: var(--blue-color);
   color: var(--secondary-background-color);
+}
+
+.winnerScreen {
+  position: fixed;
+  z-index: 5;
+  width: 480px;
+  height: 480px;
+  text-align: center;
+  padding-top: 165px;
+  background-color: rgba(37, 37, 37, 0.9);
+  color: var(--secondary-background-color);
+  font-size: 4rem;
 }
 
 .gameContainer {

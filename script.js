@@ -120,14 +120,19 @@ const gameFlow = (a, b) => {
   }
 
   function displayWinner(result) {
+    let winScreen = document.querySelector('.winnerScreen');
+
     if (result === "") {
       return
     } else if (result === player1.getMarker()) {
-      console.log("The winner is: " + player1.getName());
+      winScreen.textContent = "The winner is " + player1.getName() + "!";
+      winScreen.classList.remove('hidden');
     } else if (result === player2.getMarker()) {
-      console.log("The winner is: " + player2.getName());
+      winScreen.textContent = "The winner is " + player2.getName() + "!";
+      winScreen.classList.remove('hidden');
     } else if (result === "draw") {
-      console.log("The game is a draw");
+      winScreen.textContent = "The game ends in a DRAW";
+      winScreen.classList.remove('hidden');
     }
     gameSquares.forEach(square => {
       square.removeEventListener('click', addMark);
@@ -136,6 +141,9 @@ const gameFlow = (a, b) => {
   }
 
   function resetGame() {
+    let winScreen = document.querySelector('.winnerScreen');
+    winScreen.textContent = "";
+    winScreen.classList.add('hidden');
     gameBoard.gameArray = ["", "", "", "", "", "", "", "", ""];
     gameBoard.displayMarks(gameBoard.gameArray);
     gameSquares.forEach(square => {
