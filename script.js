@@ -37,6 +37,11 @@ const newGame = (() => {
     let gameSpace = document.querySelector('.gameSpace');
     gameSpace.classList.remove('hidden');
 
+    let name1 = document.querySelector('.name1');
+    name1.textContent = player1Name;
+    let name2 = document.querySelector('.name2');
+    name2.textContent = player2Name;
+
     gameFlow(player1Name, player2Name);
   }
 
@@ -101,6 +106,9 @@ const gameFlow = (a, b) => {
   let newGameBtn = document.querySelector('.newGame');
   newGameBtn.addEventListener('click', startNewGame);
 
+  let name1 = document.querySelector('.name1');
+  let name2 = document.querySelector('.name2');
+
   function addMark() {
     if (this.textContent !== "") {
       return
@@ -109,11 +117,15 @@ const gameFlow = (a, b) => {
       this.classList.add('taken');
       player1.turn = false;
       player2.turn = true;
+      name1.classList.remove('turnShadow');
+      name2.classList.add('turnShadow');
     } else if (player2.turn) {
       gameBoard.gameArray.splice(this.id, 1, player2.getMarker());
       this.classList.add('taken');
       player1.turn = true;
       player2.turn = false;
+      name1.classList.add('turnShadow');
+      name2.classList.remove('turnShadow');
     }
     gameBoard.displayMarks(gameBoard.gameArray);
     displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
@@ -127,12 +139,18 @@ const gameFlow = (a, b) => {
     } else if (result === player1.getMarker()) {
       winScreen.textContent = "The winner is " + player1.getName() + "!";
       winScreen.classList.remove('hidden');
+      name1.classList.add('turnShadow');
+      name2.classList.remove('turnShadow');
     } else if (result === player2.getMarker()) {
       winScreen.textContent = "The winner is " + player2.getName() + "!";
       winScreen.classList.remove('hidden');
+      name1.classList.remove('turnShadow');
+      name2.classList.add('turnShadow');
     } else if (result === "draw") {
       winScreen.textContent = "The game ends in a DRAW";
       winScreen.classList.remove('hidden');
+      name1.classList.remove('turnShadow');
+      name2.classList.remove('turnShadow');
     }
     gameSquares.forEach(square => {
       square.removeEventListener('click', addMark);
@@ -152,6 +170,8 @@ const gameFlow = (a, b) => {
     });
     player1.turn = true;
     player2.turn = false;
+    name1.classList.add('turnShadow');
+    name2.classList.remove('turnShadow');
   }
 
   function startNewGame() {

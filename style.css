@@ -44,6 +44,7 @@ main {
   align-items: stretch;
   justify-content: center;
   position: relative;
+  gap: 80px;
 }
 
 .gameSpace {
@@ -74,6 +75,28 @@ main {
 .returnButton:hover {
   background-color: var(--blue-color);
   color: var(--secondary-background-color);
+}
+
+.nameSpace {
+  position: absolute;
+  left: -310px;
+  display: flex;
+  gap: 520px;
+  justify-content: center;
+  align-items: center;
+}
+
+.name1,
+.name2 {
+  color: var(--blue-color);
+  font-family: 'marker';
+  font-size: 3rem;
+  width: 300px;
+  text-align: center;
+}
+
+.turnShadow {
+  text-shadow: 0 0 50px var(--secondary-background-color), 0 0 120px var(--secondary-background-color);
 }
 
 .winnerScreen {
