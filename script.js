@@ -8,6 +8,12 @@ const newGame = (() => {
   let playerGame = document.querySelector('.vsPlayer');
   playerGame.addEventListener('click', choosePlayers);
 
+  let gameStart = document.querySelector('.startGame');
+  gameStart.addEventListener('click', showGame);
+
+  let returnBtn = document.querySelector('.returnButton');
+  returnBtn.addEventListener('click', backToStart);
+
   function choosePlayers() {
     let newGameDiv = document.querySelector('.newGameOptions');
     newGameDiv.classList.add('hidden');
@@ -15,7 +21,31 @@ const newGame = (() => {
     vsPlayerDiv.classList.remove('hidden');
   }
 
+  function showGame() {
+    let player1Name = document.querySelector('#player1Name').value;
+    let player2Name = document.querySelector('#player2Name').value;
 
+    if (player1Name === "") {
+      player1Name = "Player 1";
+    }
+    if (player2Name === "") {
+      player2Name = "Player 2";
+    }
+
+    let vsPlayerDiv = document.querySelector('.vsPlayerOptions');
+    vsPlayerDiv.classList.add('hidden');
+    let gameSpace = document.querySelector('.gameSpace');
+    gameSpace.classList.remove('hidden');
+
+    gameFlow(player1Name, player2Name);
+  }
+
+  function backToStart() {
+    let newGameDiv = document.querySelector('.newGameOptions');
+    newGameDiv.classList.remove('hidden');
+    let vsPlayerDiv = document.querySelector('.vsPlayerOptions');
+    vsPlayerDiv.classList.add('hidden');
+  }
 })();
 
 const gameBoard = (() => {
@@ -57,9 +87,10 @@ const gameBoard = (() => {
   return {gameArray, displayMarks, checkWinner};
 })();
 
-const gameFlow = (() => {
-  let player1 = createPlayer("A", "X", true);
-  let player2 = createPlayer("B", "O", false);
+const gameFlow = (a, b) => {
+
+  let player1 = createPlayer(a, "X", true);
+  let player2 = createPlayer(b, "O", false);
 
   let gameSquares = document.querySelectorAll('.gameSquare');
   gameSquares.forEach(square => square.addEventListener('click', addMark));
@@ -116,10 +147,6 @@ const gameFlow = (() => {
   }
 
   function startNewGame() {
-    resetGame();
-    let gameSpace = document.querySelector('.gameSpace');
-    gameSpace.classList.add('hidden');
-    let newGameDiv = document.querySelector('.newGameOptions');
-    newGameDiv.classList.remove('hidden');
+    window.location.reload();
   }
-})();
+};
