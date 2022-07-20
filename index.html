@@ -52,12 +52,21 @@
             <input type="text" name="player2Name" id="player2Name" maxlength="10">
           </div>
         </div>
-        <button type="button" class="startGame">Let's Play!</button>
+        <button type="button" class="startGame gameStartPlayer">Let's Play!</button>
         <button type="button" class="returnButton">Back to Options</button>
       </form>
     </div>
     <div class="vsAIOptions hidden">
-
+      <form action="" class="playerNameSelection" autocomplete="off">
+        <div class="inputs">
+          <div class="input">
+            <label for="playerName">Player Name:</label>
+            <input type="text" name="playerName" id="playerName" maxlength="10">
+          </div>
+        </div>
+        <button type="button" class="startGame gameStartAI">Let's Play!</button>
+        <button type="button" class="returnButton">Back to Options</button>
+      </form>
     </div>
   </main>
   <footer class="footer">
