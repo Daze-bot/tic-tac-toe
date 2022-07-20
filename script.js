@@ -39,7 +39,7 @@ const newGame = (() => {
     let name2 = document.querySelector('.name2');
     name2.textContent = player2Name;
 
-    playerGameFlow(player1Name, player2Name);
+    gameFlow(player1Name, player2Name, "player");
   }
 
   let AIGame = document.querySelector('.vsAI');
@@ -73,7 +73,7 @@ const newGame = (() => {
     let name2 = document.querySelector('.name2');
     name2.textContent = AIName;
 
-    AIGameFlow(playerName, AIName);
+    gameFlow(playerName, AIName, "ai");
   }
 
   let returnBtn = document.querySelectorAll('.returnButton');
@@ -128,94 +128,7 @@ const gameBoard = (() => {
   return {gameArray, displayMarks, checkWinner};
 })();
 
-const playerGameFlow = (a, b) => {
-
-  let player1 = createPlayer(a, "X", true);
-  let player2 = createPlayer(b, "O", false);
-
-  let gameSquares = document.querySelectorAll('.gameSquare');
-  gameSquares.forEach(square => square.addEventListener('click', addMark));
-
-  let resetBtn = document.querySelector('.restartGame');
-  resetBtn.addEventListener('click', resetGame);
-
-  let newGameBtn = document.querySelector('.newGame');
-  newGameBtn.addEventListener('click', startNewGame);
-
-  let name1 = document.querySelector('.name1');
-  let name2 = document.querySelector('.name2');
-
-  function addMark() {
-    if (this.textContent !== "") {
-      return
-    } else if (player1.turn) {
-      gameBoard.gameArray.splice(this.id, 1, player1.getMarker());
-      this.classList.add('taken');
-      player1.turn = false;
-      player2.turn = true;
-      name1.classList.remove('turnShadow');
-      name2.classList.add('turnShadow');
-    } else if (player2.turn) {
-      gameBoard.gameArray.splice(this.id, 1, player2.getMarker());
-      this.classList.add('taken');
-      player1.turn = true;
-      player2.turn = false;
-      name1.classList.add('turnShadow');
-      name2.classList.remove('turnShadow');
-    }
-    gameBoard.displayMarks(gameBoard.gameArray);
-    displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
-  }
-
-  function displayWinner(result) {
-    let winScreen = document.querySelector('.winnerScreen');
-
-    if (result === "") {
-      return
-    } else if (result === player1.getMarker()) {
-      winScreen.textContent = "The winner is " + player1.getName() + "!";
-      winScreen.classList.remove('hidden');
-      name1.classList.add('turnShadow');
-      name2.classList.remove('turnShadow');
-    } else if (result === player2.getMarker()) {
-      winScreen.textContent = "The winner is " + player2.getName() + "!";
-      winScreen.classList.remove('hidden');
-      name1.classList.remove('turnShadow');
-      name2.classList.add('turnShadow');
-    } else if (result === "draw") {
-      winScreen.textContent = "The game ends in a DRAW";
-      winScreen.classList.remove('hidden');
-      name1.classList.remove('turnShadow');
-      name2.classList.remove('turnShadow');
-    }
-    gameSquares.forEach(square => {
-      square.removeEventListener('click', addMark);
-      square.classList.add('taken');
-    });
-  }
-
-  function resetGame() {
-    let winScreen = document.querySelector('.winnerScreen');
-    winScreen.textContent = "";
-    winScreen.classList.add('hidden');
-    gameBoard.gameArray = ["", "", "", "", "", "", "", "", ""];
-    gameBoard.displayMarks(gameBoard.gameArray);
-    gameSquares.forEach(square => {
-      square.addEventListener('click', addMark);
-      square.classList.remove('taken');
-    });
-    player1.turn = true;
-    player2.turn = false;
-    name1.classList.add('turnShadow');
-    name2.classList.remove('turnShadow');
-  }
-
-  function startNewGame() {
-    window.location.reload();
-  }
-};
-
-const AIGameFlow = (a, b) => {
+const gameFlow = (a, b, type) => {
 
   let player1 = createPlayer(a, "X", true);
   let player2 = createPlayer(b, "O", false);
@@ -228,42 +141,39 @@ const AIGameFlow = (a, b) => {
 
   function addMark() {
     if (this.textContent !== "") {
-      return;
-    } else if (player1.turn) {
-      gameBoard.gameArray.splice(this.id, 1, player1.getMarker());
-      this.classList.add('taken');
-      player1.turn = false;
-      player2.turn = true;
-      name1.classList.remove('turnShadow');
-      name2.classList.add('turnShadow');
-      gameBoard.displayMarks(gameBoard.gameArray);
-      displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
-
-      setTimeout(AIMove, 2000);
-    }
-  }
-
-  function AIMove() {
-    let winScreen = document.querySelector('.winnerScreen');
-    let indexes = [];
-      for (let i = 0; i < gameBoard.gameArray.length; i++) {
-        if (gameBoard.gameArray[i] === "") {
-          indexes.push(i);
-        }
-      }
-
-      if (indexes.length > 0 && winScreen.classList.contains('hidden')) {
-        let item = indexes[Math.floor(Math.random()*indexes.length)];
-        gameBoard.gameArray.splice(item, 1, player2.getMarker());
-        let p2GameSquare = document.getElementById(`${item}`);
-        p2GameSquare.classList.add('taken');
-        gameBoard.displayMarks(gameBoard.gameArray);
-        displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
+      return
+    } else if (type === "player") {
+      if (player1.turn) {
+        gameBoard.gameArray.splice(this.id, 1, player1.getMarker());
+        this.classList.add('taken');
+        player1.turn = false;
+        player2.turn = true;
+        name1.classList.remove('turnShadow');
+        name2.classList.add('turnShadow');
+      } else if (player2.turn) {
+        gameBoard.gameArray.splice(this.id, 1, player2.getMarker());
+        this.classList.add('taken');
         player1.turn = true;
         player2.turn = false;
         name1.classList.add('turnShadow');
         name2.classList.remove('turnShadow');
       }
+      gameBoard.displayMarks(gameBoard.gameArray);
+      displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
+    } else if (type === "ai") {
+      if (player1.turn) {
+        gameBoard.gameArray.splice(this.id, 1, player1.getMarker());
+        this.classList.add('taken');
+        player1.turn = false;
+        player2.turn = true;
+        name1.classList.remove('turnShadow');
+        name2.classList.add('turnShadow');
+        gameBoard.displayMarks(gameBoard.gameArray);
+        displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
+  
+        setTimeout(AIMove, 2000);
+      }
+    }
   }
 
   function displayWinner(result) {
@@ -291,6 +201,29 @@ const AIGameFlow = (a, b) => {
       square.removeEventListener('click', addMark);
       square.classList.add('taken');
     });
+  }
+
+  function AIMove() {
+    let winScreen = document.querySelector('.winnerScreen');
+    let indexes = [];
+    for (let i = 0; i < gameBoard.gameArray.length; i++) {
+      if (gameBoard.gameArray[i] === "") {
+        indexes.push(i);
+      }
+    }
+    // AI will not make a move on empty, full, or won game
+    if (indexes.length > 0 && indexes.length < 9 && winScreen.classList.contains('hidden')) {
+      let item = indexes[Math.floor(Math.random()*indexes.length)];
+      gameBoard.gameArray.splice(item, 1, player2.getMarker());
+      let p2GameSquare = document.getElementById(`${item}`);
+      p2GameSquare.classList.add('taken');
+      player1.turn = true;
+      player2.turn = false;
+      name1.classList.add('turnShadow');
+      name2.classList.remove('turnShadow');
+      gameBoard.displayMarks(gameBoard.gameArray);
+      displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
+    }
   }
 
   let resetBtn = document.querySelector('.restartGame');
