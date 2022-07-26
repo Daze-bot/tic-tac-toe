@@ -171,7 +171,7 @@ const gameFlow = (a, b, type) => {
         gameBoard.displayMarks(gameBoard.gameArray);
         displayWinner(gameBoard.checkWinner(gameBoard.gameArray));
   
-        setTimeout(AIMove, 2000);
+        setTimeout(AIMove, 1000);
       }
     }
   }
